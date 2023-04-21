@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lx="clr-namespace:LXNavi"
+             xmlns:localization="clr-namespace:LXNavi.Resources.Localization"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="lx:SensorsViewModel"
+             Title="{Binding LocalizationService[Sensors]}"
+             x:Class="LXNavi.MainPage">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{StaticResource MikuGreenA}" StatusBarStyle="LightContent" />
+    </ContentPage.Behaviors>
+    <Grid RowDefinitions="*,Auto">
+        <Image Source="glassbackground.png" Aspect="AspectFill"  Grid.RowSpan="2" />
+        <ScrollView>
+            <VerticalStackLayout Padding="20" Spacing="15" Margin="0,30,0,0">
+                <Border Stroke="#33FFFFFF" StrokeThickness="3" Background="#AACCCCCC">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"  Binding="{Binding AccelerometerViewModel.IsMonitoring}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MikuRedA}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border"  Binding="{Binding AccelerometerViewModel.IsMonitoring}" Value="False">
+                            <Setter Property="Background" Value="#AACCCCCC" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Grid RowDefinitions="Auto,*" RowSpacing="10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20" Padding="20,25">
+                        <Image Grid.RowSpan="2" Source="accelerometer.svg" Style="{StaticResource SensorIcon}" />
+                        <Label Grid.Column="1" Text="{Binding LocalizationService[Accelerometer]}" FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}" LineBreakMode="WordWrap" />
+                        <ImageButton Grid.Column="2" Style="{StaticResource LineChartButton}" Command="{Binding GoToDetailCommand}" CommandParameter="{Binding AccelerometerViewModel}" />
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding AccelerometerViewModel.LatestDataText}" FontSize="Medium" VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </Border>
+                <Border Padding="0" Stroke="#33FFFFFF" StrokeThickness="3" Background="#AACCCCCC">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"  Binding="{Binding GyroscopeViewModel.IsMonitoring}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MeaYellowA}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border"  Binding="{Binding GyroscopeViewModel.IsMonitoring}" Value="False">
+                            <Setter Property="Background" Value="#AACCCCCC" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Grid RowDefinitions="Auto,*" RowSpacing="10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20" Padding="20,25">
+                        <Image Grid.RowSpan="2" Source="gyroscope.svg" Style="{StaticResource SensorIcon}" />
+                        <Label Grid.Column="1" Text="{Binding LocalizationService[Gyroscope]}" FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}" />
+                        <ImageButton Grid.Column="2" Style="{StaticResource LineChartButton}" Command="{Binding GoToDetailCommand}" CommandParameter="{Binding GyroscopeViewModel}" />
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding GyroscopeViewModel.LatestDataText}" FontSize="Medium" VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </Border>
+                <Border Padding="0" Stroke="#33FFFFFF" StrokeThickness="3" Background="#AACCCCCC">
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"  Binding="{Binding MagnetometerViewModel.IsMonitoring}" Value="True">
+                            <Setter Property="Background" Value="{StaticResource MeaBlueA}" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Border"  Binding="{Binding MagnetometerViewModel.IsMonitoring}" Value="False">
+                            <Setter Property="Background" Value="#AACCCCCC" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Grid RowDefinitions="Auto,*" RowSpacing="10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="20" Padding="20,25">
+                        <Image Grid.RowSpan="2" Source="magnetometer.svg" Style="{StaticResource SensorIcon}" />
+                        <Label Grid.Column="1" Text="{Binding LocalizationService[Magnetometer]}" FontSize="Title" FontAttributes="Bold" TextColor="{StaticResource White}" />
+                        <ImageButton Grid.Column="2" Style="{StaticResource LineChartButton}" Command="{Binding GoToDetailCommand}" CommandParameter="{Binding MagnetometerViewModel}" />
+                        <Label Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" Text="{Binding MagnetometerViewModel.LatestDataText}" FontSize="Medium" VerticalOptions="CenterAndExpand" />
+                    </Grid>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Grid Grid.Row="1" ColumnDefinitions="Auto,*,Auto" Padding="20,0" ColumnSpacing="20" Margin="0,0,0,4">
+            <ImageButton  Source="trashcan.svg" Style="{StaticResource BaseImageButton}" Command="{Binding ClearCommand}">
+                <ImageButton.Shadow>
+                    <Shadow Offset="0,0" Radius="5" Brush="{StaticResource White}" />
+                </ImageButton.Shadow>
+            </ImageButton>
+            <Border Grid.Column="1" Background="{StaticResource GreenBlueRedBrush}" StrokeThickness="3" Stroke="#33FFFFFF">
+                <Border.Shadow>
+                    <Shadow Offset="0,0" Radius="39" Brush="{StaticResource GreenBlueRedBrush}" />
+                </Border.Shadow>
+                <Button Text="{Binding ToggleButtonText}" TextColor="{StaticResource White}" Command="{Binding ToggleCommand}" FontSize="Subtitle" CornerRadius="1" Padding="0" BackgroundColor="#33FFFFFF" HeightRequest="39">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+                                        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                </Button>
+            </Border>
+            <ImageButton Grid.Column="2" Source="share.svg" Style="{StaticResource BaseImageButton}" Command="{Binding SaveAndShareCommand}">
+                <ImageButton.Shadow>
+                    <Shadow Offset="0,0" Radius="5" Brush="{StaticResource White}" />
+                </ImageButton.Shadow>
+            </ImageButton>
+        </Grid>
+    </Grid>
+</ContentPage>

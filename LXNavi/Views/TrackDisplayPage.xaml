@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<backdrop:SfBackdropPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lx="clr-namespace:LXNavi"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:backdrop="clr-namespace:Syncfusion.Maui.Backdrop;assembly=Syncfusion.Maui.Backdrop"
+             xmlns:sliders="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
+             x:Class="LXNavi.Views.TrackDisplayPage"
+             x:DataType="lx:TrackDisplayViewModel"
+             BackLayerRevealOption="Auto"
+             Title="{Binding LocalizationService[Track]}">
+    <backdrop:SfBackdropPage.BackLayer>
+        <backdrop:BackdropBackLayer>
+            <backdrop:BackdropBackLayer.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Offset="0" Color="{StaticResource MikuGreen}" />
+                    <GradientStop Offset="0.9" Color="{StaticResource White}" />
+                </LinearGradientBrush>
+            </backdrop:BackdropBackLayer.Background>
+            <VerticalStackLayout Padding="20" Spacing="5">
+                <Label Text="{Binding LocalizationService[CurrentLocation]}" FontSize="Title" TextColor="{StaticResource White}" />
+                <Label Text="{Binding CurrentLocationText}" TextColor="{StaticResource White}" />
+                <Label Text="{Binding LocalizationService[StepLength],StringFormat='{0}(m)'}" FontSize="Title" TextColor="{StaticResource White}" />
+                <sliders:SfSlider Minimum="0.1" Maximum="1" Value="{Binding StepLength}" ShowLabels="True" Interval="0.1"  ShowTicks="True" ShowDividers="True" StepSize="0.1">
+                    <sliders:SfSlider.TrackStyle>
+                        <sliders:SliderTrackStyle ActiveFill="{StaticResource MikuGreen}" InactiveFill="{StaticResource White}" ActiveSize="10" />
+                    </sliders:SfSlider.TrackStyle>
+                    <sliders:SfSlider.ThumbStyle>
+                        <sliders:SliderThumbStyle Fill="{StaticResource White}" Stroke="{StaticResource White}" StrokeThickness="0" Radius="10" />
+                    </sliders:SfSlider.ThumbStyle>
+                    <sliders:SfSlider.ThumbOverlayStyle>
+                        <sliders:SliderThumbOverlayStyle Fill="{StaticResource MikuGreenA}" />
+                    </sliders:SfSlider.ThumbOverlayStyle>
+                    <sliders:SfSlider.LabelStyle>
+                        <sliders:SliderLabelStyle ActiveTextColor="{StaticResource White}"
+                                  InactiveTextColor="{StaticResource MikuGreen}"
+                                  InactiveFontAttributes="Italic"
+                                  ActiveFontSize="16"
+                                  InactiveFontSize="14" />
+                    </sliders:SfSlider.LabelStyle>
+                </sliders:SfSlider>
+                <Label Text="{Binding LocalizationService[KeepCentered]}" FontSize="Title" TextColor="{StaticResource White}" />
+                <Switch HorizontalOptions="Start" IsToggled="{Binding IsKeepingCentered}" ThumbColor="{StaticResource White}" OnColor="{StaticResource MikuGreen}" />
+                <Label Text="{Binding LocalizationService[TrackColor]}" FontSize="Title" TextColor="{StaticResource White}" />
+                <HorizontalStackLayout Spacing="10" RadioButtonGroup.GroupName="StrokeColorGroup" RadioButtonGroup.SelectedValue="{Binding StrokeColor}">
+                    <RadioButton TextColor="{StaticResource White}" Content="{Binding LocalizationService[Green]}" Value="#39C5BB" />
+                    <RadioButton TextColor="{StaticResource White}" Content="{Binding LocalizationService[Red]}" Value="#E74892" />
+                    <RadioButton TextColor="{StaticResource White}" Content="{Binding LocalizationService[Yellow]}" Value="#FBD474" />
+                    <RadioButton TextColor="{StaticResource White}" Content="{Binding LocalizationService[Blue]}" Value="#7DCCE1" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </backdrop:BackdropBackLayer>
+    </backdrop:SfBackdropPage.BackLayer>
+    <backdrop:SfBackdropPage.FrontLayer>
+        <backdrop:BackdropFrontLayer LeftCornerRadius="0" RightCornerRadius="0">
+            <VerticalStackLayout>
+                <maps:Map x:Name="MapView" HeightRequest="690" IsScrollEnabled="True" />
+                <Border Grid.Column="1" Background="{StaticResource GreenBlueRedBrush}" StrokeThickness="0" Stroke="{StaticResource GreenBlueRedBrush}" Margin="39,5">
+                    <Border.Shadow>
+                        <Shadow Offset="0,0" Radius="39" Brush="{StaticResource GreenBlueRedBrush}" />
+                    </Border.Shadow>
+                    <Button Text="{Binding LocalizationService[StartTrack]}" Clicked="ToggleButton_Clicked" TextColor="{StaticResource White}" FontSize="Subtitle" CornerRadius="0" Padding="20,5" BackgroundColor="#33FFFFFF">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroupList>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <VisualState.Setters>
+                                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+                                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray600}}" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateGroupList>
+                        </VisualStateManager.VisualStateGroups>
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsBusy}" Value="True">
+                                <Setter Property="Text" Value="{Binding LocalizationService[Stop]}" />
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </Border>
+            </VerticalStackLayout>
+        </backdrop:BackdropFrontLayer>
+    </backdrop:SfBackdropPage.FrontLayer>
+</backdrop:SfBackdropPage>

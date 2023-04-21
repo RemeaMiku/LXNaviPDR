@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lx="clr-namespace:LXNavi"
+             x:Class="LXNavi.Views.OptionsPage"
+             x:DataType="lx:OptionsViewModel"
+             Title="{Binding LocalizationService[Options]}">
+    <VerticalStackLayout Padding="30">
+        <Label Text="{Binding LocalizationService[Languages]}" FontSize="Title"  FontAttributes="Bold" />
+        <HorizontalStackLayout Spacing="5" RadioButtonGroup.GroupName="LanguageOption" RadioButtonGroup.SelectedValue="{Binding LanguageCode}">
+            <RadioButton Content="English" Value="en" />
+            <RadioButton Content="中文（简体）" Value="zh" />
+            <RadioButton Content="日本語" Value="ja" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

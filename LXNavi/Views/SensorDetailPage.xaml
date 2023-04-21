@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lx="clr-namespace:LXNavi"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+             x:Class="LXNavi.Views.SensorDetailPage"
+             x:DataType="lx:SensorDetailViewModel"
+             Title="{Binding SensorViewModel.Name}">
+    <ScrollView VerticalOptions="CenterAndExpand">
+        <VerticalStackLayout Padding="10" Spacing="10">
+            <chart:SfCartesianChart HeightRequest="200">
+                <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis>
+                        <chart:DateTimeAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding LocalizationService[Utc]}" FontAttributes="Bold" />
+                        </chart:DateTimeAxis.Title>
+                    </chart:DateTimeAxis>
+                </chart:SfCartesianChart.XAxes>
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding SensorViewModel.Unit,StringFormat='X:{0}'}" FontAttributes="Bold" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+                <chart:FastLineSeries ItemsSource="{Binding SensorViewModel.DisplayDatas}" XBindingPath="DateTime" YBindingPath="X" />
+            </chart:SfCartesianChart>
+            <chart:SfCartesianChart HeightRequest="200">
+                <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis>
+                        <chart:DateTimeAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding LocalizationService[Utc]}" FontAttributes="Bold" />
+                        </chart:DateTimeAxis.Title>
+                    </chart:DateTimeAxis>
+                </chart:SfCartesianChart.XAxes>
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding SensorViewModel.Unit,StringFormat='Y:{0}'}" FontAttributes="Bold" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+                <chart:FastLineSeries ItemsSource="{Binding SensorViewModel.DisplayDatas}" XBindingPath="DateTime" YBindingPath="Y" />
+            </chart:SfCartesianChart>
+            <chart:SfCartesianChart HeightRequest="200">
+                <chart:SfCartesianChart.XAxes>
+                    <chart:DateTimeAxis>
+                        <chart:DateTimeAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding LocalizationService[Utc]}" FontAttributes="Bold" />
+                        </chart:DateTimeAxis.Title>
+                    </chart:DateTimeAxis>
+                </chart:SfCartesianChart.XAxes>
+                <chart:SfCartesianChart.YAxes>
+                    <chart:NumericalAxis>
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="{Binding SensorViewModel.Unit,StringFormat='Z:{0}'}" FontAttributes="Bold" />
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfCartesianChart.YAxes>
+                <chart:FastLineSeries ItemsSource="{Binding SensorViewModel.DisplayDatas}" XBindingPath="DateTime" YBindingPath="Z" />
+            </chart:SfCartesianChart>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

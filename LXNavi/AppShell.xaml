@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LXNavi.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:v="clr-namespace:LXNavi.Views"
+    xmlns:local="clr-namespace:LXNavi"
+    xmlns:sys="clr-namespace:System;assembly=netstandard"
+    xmlns:lx="clr-namespace:LXNavi"
+    x:DataType="lx:AppShellViewModel"
+    FlyoutBehavior="Flyout"
+    FlyoutWidth="240">
+    <Shell.FlyoutBackground>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Offset="0" Color="#CCFFFFFF" />
+            <GradientStop Offset="1" Color="#CCFFFFFF" />
+        </LinearGradientBrush>
+    </Shell.FlyoutBackground>
+    <Shell.FlyoutHeader>
+        <Image Source="lxsoft.png" />
+    </Shell.FlyoutHeader>
+    <ShellContent Icon="accelerometer.svg" Title="{Binding LocalizationService[Sensors],Mode=OneWay}" ContentTemplate="{DataTemplate local:MainPage}" />
+    <ShellContent Icon="polyline.svg" Title="{Binding LocalizationService[Track],Mode=OneWay}" ContentTemplate="{DataTemplate v:TrackDisplayPage}" />
+    <ShellContent Icon="options.png" Title="{Binding LocalizationService[Options],Mode=OneWay}" ContentTemplate="{DataTemplate v:OptionsPage}" />
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout Padding="20">
+            <Label Text="RemeaMiku" HorizontalOptions="Center" FontAttributes="Bold" />
+            <Label Text="{Binding Source={x:Static sys:DateTime.Now},StringFormat='{0:yyyy/MM/dd}'}" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+</Shell>
