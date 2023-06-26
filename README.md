@@ -40,6 +40,14 @@ Views对应于MVVM中的视图层，存放页面的XAML标记文件和其代码�
 
 `AppShell`即当前的MAUI应用外壳类，继承于`Shell`。可在AppShell.xaml中定义页面导航方式以及布局样式。本次实习用的是比较常见的飞出式菜单(Flyout Menu)。
 ## 界面与功能展示
-<video id="demo" controls="" preload="none">
-      <source id="mp4" src="demo.mp4" type="video/mp4">
-</videos>
+### 传感器监测
+![传感器监测.gif](GIFs/传感器监测.gif)
+- 实时显示加速度计、陀螺仪和磁强计三轴输出
+- 实时绘制传感器三轴输出随时间变化曲线
+- 传感器数据记录和分享
+### 实时轨迹绘制
+![实时轨迹绘制.gif](GIFs/实时轨迹绘制.gif)
+- 实时位置显示
+- 轨迹颜色设置
+- 行人步长调节
+- 视图居中开关
