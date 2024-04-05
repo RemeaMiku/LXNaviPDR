@@ -30,7 +30,7 @@ public class SensorsService
 
     public Sensor Magnetometer { get; } = new();
 
-    public List<(DateTime UtcTime, EulerAngle EulerAngle)> AttitudeDatas { get; } = new();
+    public List<(DateTime UtcTime, EulerAngles EulerAngle)> AttitudeDatas { get; } = new();
 
     public SensorViewModel AccelerometerViewModel { get; }
 
@@ -38,7 +38,7 @@ public class SensorsService
 
     public SensorViewModel MagnetometerViewModel { get; }
 
-    public List<(DateTime UtcTime, Vector3 AccelerometerData, Vector3 GyroscopeData, Vector3 MagnetometerData, EulerAngle EulerAngle)> IntegratedDatas { get; } = new();
+    public List<(DateTime UtcTime, Vector3 AccelerometerData, Vector3 GyroscopeData, Vector3 MagnetometerData, EulerAngles EulerAngle)> IntegratedDatas { get; } = new();
 
     #endregion Public Properties
 
@@ -193,7 +193,7 @@ public class SensorsService
     {
         // Update UI Label with orientation state
         var quaternion = e.Reading.Orientation;
-        var eulerAngle = new Quaternion<float>(quaternion.W, quaternion.X, quaternion.Y, quaternion.Z).ToMatrix().ToEulerAngle();
+        var eulerAngle = new Quaternion<double>(quaternion.W, quaternion.X, quaternion.Y, quaternion.Z).ToRotationMatrix().ToEulerAngles();
         //!手机轴系定义与库中定义不同
         eulerAngle = eulerAngle with { Yaw = Angle.RoundAngle - eulerAngle.Yaw };
         AttitudeDatas.Add((DateTime.UtcNow, eulerAngle));

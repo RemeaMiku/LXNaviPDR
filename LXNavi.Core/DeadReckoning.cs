@@ -55,7 +55,7 @@ public class DeadReckoning
             return CurrentCoord;
         LastUpdateTimeStamp = measurement.TimeStamp;
         if (_yawWindow.Count > 0)
-            yaw = new(_yawWindow.Average(yaw => yaw.Rads));
+            yaw = new(_yawWindow.Average(yaw => yaw.Radians));
         var delta = new Vector2((float)(StepLength * Sin(yaw)), (float)(StepLength * Cos(yaw)));
         return CurrentCoord += delta;
     }

@@ -1,5 +1,5 @@
-﻿using static NaviSharp.EarthEllipsoid;
-using LXNavi.Core;
+﻿using LXNavi.Core;
+using NaviSharp.SpatialReference;
 
 namespace LXNavi;
 
@@ -25,8 +25,8 @@ public partial class DeadReckoningService
     {
         var currentCoord = DeadReckoning.GetCurrentCoord(measurement);
         var initialLatitude = FromDegrees(InitialLocation.Latitude);
-        var deltaLon = UnitConverters.RadiansToDegrees(currentCoord.X / Wgs84.M(initialLatitude));
-        var deltaLat = UnitConverters.RadiansToDegrees(currentCoord.Y / (Wgs84.N(initialLatitude) * Cos(initialLatitude)));
+        var deltaLon = UnitConverters.RadiansToDegrees(currentCoord.X / EarthEllipsoid.Wgs84.M(initialLatitude));
+        var deltaLat = UnitConverters.RadiansToDegrees(currentCoord.Y / (EarthEllipsoid.Wgs84.N(initialLatitude) * Cos(initialLatitude)));
         CurrentLocation = new Location(InitialLocation.Latitude + deltaLat, InitialLocation.Longitude + deltaLon, DeadReckoning.LastMeasurementTimeStamp);
         return CurrentLocation;
     }

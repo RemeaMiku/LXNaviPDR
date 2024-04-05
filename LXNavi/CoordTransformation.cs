@@ -1,4 +1,5 @@
-﻿using static System.Math;
+﻿using NaviSharp.SpatialReference;
+using static System.Math;
 
 namespace LXNavi;
 
