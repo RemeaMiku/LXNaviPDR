@@ -6,7 +6,7 @@ public class DeadReckoningMeasurement
 {
     #region Public Constructors
 
-    public DeadReckoningMeasurement(DateTimeOffset timeStamp, double acceleration, EulerAngle eulerAngle)
+    public DeadReckoningMeasurement(DateTimeOffset timeStamp, double acceleration, EulerAngles eulerAngle)
     {
         TimeStamp = timeStamp;
         Acceleration = acceleration;
@@ -19,7 +19,7 @@ public class DeadReckoningMeasurement
 
     public DateTimeOffset TimeStamp { get; init; }
     public double Acceleration { get; init; }
-    public EulerAngle EulerAngle { get; init; }
+    public EulerAngles EulerAngle { get; init; }
 
     #endregion Public Properties
 }

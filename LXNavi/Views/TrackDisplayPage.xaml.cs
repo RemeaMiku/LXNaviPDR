@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Android.Gms.Maps;
 using Microsoft.Maui.Controls.Maps;
 using Syncfusion.Maui.Backdrop;
 
@@ -138,6 +139,7 @@ public partial class TrackDisplayPage : SfBackdropPage
             _cancellationTokenSource.Cancel();
             _trackPoints.Clear();
             MapView.Pins.Clear();
+            MapView.MapElements.Clear();
             _trackDisplayViewModel.IsBusy = false;
             _trackDisplayViewModel.CurrentLocation = null;
         }
